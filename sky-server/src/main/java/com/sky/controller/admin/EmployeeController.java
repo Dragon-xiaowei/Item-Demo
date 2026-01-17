@@ -94,6 +94,7 @@ public class EmployeeController {
     }
 
 
+    //分页查询
     @GetMapping("/page")
     public Result<PageResult> SreachEmployee( EmployeePageQueryDTO employeePageQueryDTO){
         log.info("参数为:{}",employeePageQueryDTO);
@@ -109,8 +110,26 @@ public class EmployeeController {
       log.info("status:{}",statue);
         employeeService.update(statue,id);
         return Result.success();
+    }
 
 
+    //修改员工信息
+   //1.查询回显
+    @GetMapping("/{id}")
+    public Result<Employee> selectbyid (@PathVariable Long id){
+
+        Employee sreachEmp =  employeeService.selectbyid(id);
+
+
+        return Result.success(sreachEmp);
+    }
+    //2.更新数据
+    @PutMapping
+    public Result updateEmpInfo(@RequestBody EmployeeDTO employeeDTO){
+
+        log.info("修改数据:{}",employeeDTO);
+       employeeService.updateEmpInfo(employeeDTO);
+        return Result.success();
     }
 
 

@@ -6,8 +6,6 @@ import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.result.PageResult;
 
-import java.util.List;
-
 public interface EmployeeService {
 
     /**
@@ -20,10 +18,16 @@ public interface EmployeeService {
     //新增员工
     void addEmployee(EmployeeDTO employeeinfo);
 
+    //分页查询
     PageResult SearchEmployee(EmployeePageQueryDTO employeePageQueryDTO);
 
+    //修改账号状态,启用禁用
     void update(Integer statue, Long id);
 
+    //修改员工信息,1.查询回显2.更新数据
+    Employee selectbyid(Long id);
+    void updateEmpInfo(EmployeeDTO employeeDTO);
 
-    // PageResult SearchEmployee(EmployeePageQueryDTO employeePageQueryDTO);
+
+
 }
