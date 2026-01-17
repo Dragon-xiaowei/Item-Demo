@@ -3,8 +3,10 @@ package com.sky.controller.admin;
 import com.sky.constant.JwtClaimsConstant;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
+import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.EmployeeService;
 import com.sky.utils.JwtUtil;
@@ -14,12 +16,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -84,14 +84,34 @@ public class EmployeeController {
 
 
 
+    //新增员工
     @PostMapping
     @ApiOperation(value = "新增员工")
     public Result<String> addEmployee(@RequestBody EmployeeDTO employeeinfo){
         log.info("新增员工;{}",employeeinfo);
         employeeService.addEmployee(employeeinfo);
         return Result.success();
+    }
+
+
+    @GetMapping("/page")
+    public Result<PageResult> SreachEmployee( EmployeePageQueryDTO employeePageQueryDTO){
+        log.info("参数为:{}",employeePageQueryDTO);
+       PageResult pages = employeeService.SearchEmployee(employeePageQueryDTO);
+        return Result.success(pages);
+    }
+
+
+    //修改用户状态
+    @PostMapping ("/status/{statue}")
+    public Result startAndstop (@PathVariable Integer statue ,Long id){
+      log.info("id:{}",id);
+      log.info("status:{}",statue);
+        employeeService.update(statue,id);
+        return Result.success();
 
 
     }
+
 
 }

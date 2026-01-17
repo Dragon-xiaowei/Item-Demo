@@ -2,7 +2,11 @@ package com.sky.service;
 
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
+import com.sky.result.PageResult;
+
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -15,4 +19,11 @@ public interface EmployeeService {
 
     //新增员工
     void addEmployee(EmployeeDTO employeeinfo);
+
+    PageResult SearchEmployee(EmployeePageQueryDTO employeePageQueryDTO);
+
+    void update(Integer statue, Long id);
+
+
+    // PageResult SearchEmployee(EmployeePageQueryDTO employeePageQueryDTO);
 }
