@@ -68,6 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    //添加员工信息
     @Override
     public void addEmployee(EmployeeDTO employeeinfo) {
 
@@ -79,12 +80,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStatus(StatusConstant.ENABLE);
         //设置账号密码 默认123456
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-        //设置创建时间修改时间为当前时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        //设置当前记录创建人和修改人
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        //设置创建时间修改时间为当前时间
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
+//        //设置当前记录创建人和修改人
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
 
         //数据校验
         employeeMapper.addEmployee(employee);
@@ -136,8 +137,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         epm.setUsername(employeeDTO.getUsername());
         epm.setSex(employeeDTO.getSex());
         epm.setPhone(employeeDTO.getPhone());
-        epm.setUpdateTime(LocalDateTime.now());
-        epm.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(epm);
     }
 
